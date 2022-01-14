@@ -1,0 +1,30 @@
+_subdirectory: project
+
+_tasks:
+  - mkdir -p dist/
+  - mkdir -p tests/unit/
+
+project_long_name:
+  help: Long name / one line description.
+  type: str
+
+project_name:
+  help: Project short name, no spaces.
+  type: str
+  default: "[[ project_long_name.lower().replace(' ', '_') ]]"
+
+license:
+  type: str
+  choices:
+    - "GNU GPL v3.0"
+    - "MIT"
+    - "BSD-3"
+    - "Apache Software License 2.0"
+  default: "GNU GPL v3.0"
+
+author_name:
+  type: str
+
+author_email:
+  type: str
+

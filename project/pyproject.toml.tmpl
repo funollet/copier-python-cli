@@ -1,0 +1,52 @@
+[tool.poetry]
+name = "[[ project_name ]]"
+version = "0.1.0"
+description = "[[ project_long_name ]]"
+authors = ["[[ author_name ]] <[[ author_email ]]>"]
+license = "[[ license ]]"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+isort = "^5.10.1"
+autoflake = "^1.4"
+black = "^21.12b0"
+flake8 = "^4.0.1"
+pytest = "^6.2.5"
+bandit = "^1.7.1"
+safety = "^1.10.3"
+mypy = "^0.931"
+shiv = "^1.0.0"
+
+[tool.poetry.scripts]
+[[ project_name ]] = "[[ project_name ]].console:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.black]
+line_length=88
+exclude = '''
+/(
+    \.git
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[flake8]
+max-line-length = 88
+# Extra config may be required for black compatibility.
+#select = B,C,E,F,W,T4,B9
+#ignore = E203, E266, E501, W503, F403, F401
+
+[tool.bandit]
+skips = ["B101"]

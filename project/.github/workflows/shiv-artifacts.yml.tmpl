@@ -1,0 +1,43 @@
+# .github/workflows/shiv-artifacts.yml
+
+name: Create shiv artifacts
+on:
+  release:
+    types: [published]
+env:
+  project: "[[ project_name ]]"
+  shiv_version: "0.5.2"
+
+jobs:
+  release:
+    strategy:
+      matrix:
+        os: ["ubuntu-latest", "macos-latest"]
+        python-version: ["3.7", "3.8", "3.9"]
+    runs-on: "${{ matrix.os }}"
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: "${{ matrix.python-version }}"
+        architecture: x64
+
+    - name: Generate a name for the artifact
+      run: >
+        python -c 'from sys import version_info as v ;
+        print(f"artifact=${{ env.project }}-${{ github.event.release.tag_name }}-${{ runner.os }}-x86_64-py{v.major}.{v.minor}")'
+        >> $GITHUB_ENV
+    - name: Install dependencies
+      run: pip install shiv==${{ env.shiv_version}}
+    - name: create dist folder
+      run: mkdir ./dist
+    - name: build executable artifact
+      run: |
+        shiv . -p '/usr/bin/env python3' -c ${{ env.project }} -o dist/${{ env.artifact }}
+    - name: upload artifact to releases
+      uses: alexellis/upload-assets@0.3.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        asset_paths: '["./dist/${{ env.artifact }}"]'
