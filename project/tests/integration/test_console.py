@@ -1,6 +1,5 @@
 import click.testing
-
-from [[ project_name ]] import console
+from {{project_name}} import console
 
 
 def test_main_succeeds():

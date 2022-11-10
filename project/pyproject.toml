@@ -1,9 +1,9 @@
 [tool.poetry]
-name = "[[ project_name ]]"
+name = "{{ project_name }}"
 version = "0.1.0"
-description = "[[ project_long_name ]]"
-authors = ["[[ author_name ]] <[[ author_email ]]>"]
-license = "[[ license ]]"
+description = "{{ project_long_name }}"
+authors = ["{{ author_name }} <{{ author_email }}>"]
+license = "{{ license }}"
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -20,7 +20,7 @@ mypy = "^0.931"
 shiv = "^1.0.0"
 
 [tool.poetry.scripts]
-[[ project_name ]] = "[[ project_name ]].console:main"
+{{ project_name }} = "{{ project_name }}.console:main"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

@@ -5,9 +5,9 @@ on:
   release:
     types: [published]
 env:
-  project: "[[ project_name ]]"
+  project: "{{ project_name }}"
   shiv_version: "0.5.2"
-
+{% raw %}
 jobs:
   release:
     strategy:
@@ -41,3 +41,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         asset_paths: '["./dist/${{ env.artifact }}"]'
+{% endraw %}

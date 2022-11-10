@@ -2,7 +2,7 @@
 #
 # https://github.com/casey/just
 
-project := "[[ project_name ]]"
+project := "{{ project_name }}"
 
 
 # Show available commands.
@@ -11,9 +11,9 @@ help:
 
 
 # Run the app.
-run:
+run:{% raw %}
   poetry run {{project}}
-
+{% endraw %}
 # Run linters and formatters.
 fmt:
   poetry run isort src/
